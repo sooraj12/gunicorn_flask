@@ -22,8 +22,8 @@ class CustomApp(BaseApplication):
     def load(self):
         return self.application
 
-    def when_ready(self, server):
-        pass
+    def when_ready(self):
+        print('server ready')
 
     def run(self):
         def handle_stop_signal(sig, frame):
@@ -37,6 +37,7 @@ if __name__ == '__main__':
         'bind': '0.0.0.0:5000',
         'workers': 2,
         'worker_class': 'gevent',
-        "loglevel": "debug"
+        "loglevel": "debug",
+        'when_ready': CustomApp.when_ready
     }
     CustomApp(app, options).run()
